@@ -1,0 +1,13 @@
+# Variables d'environnement et secrets
+.env
+.env.*
+!.env.example
+
+# Dépendances
+node_modules/
+
+# Cache Symfony
+/reps_back/var/
+
+# Fichiers générés
+/reps_back/vendor/
