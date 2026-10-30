@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: WorkoutRepository::class)]
 class Workout
@@ -14,15 +15,19 @@ class Workout
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['workout:read'])]
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Groups(['workout:read'])]
     private ?\DateTimeImmutable $performedAt = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['workout:read'])]
     private ?int $duration = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['workout:read'])]
     private ?string $notes = null;
 
     #[ORM\ManyToOne(inversedBy: 'workouts')]
@@ -33,6 +38,7 @@ class Workout
      * @var Collection<int, WorkoutSet>
      */
     #[ORM\OneToMany(targetEntity: WorkoutSet::class, mappedBy: 'workout', orphanRemoval: true)]
+    #[Groups(['workout:read'])]
     private Collection $sets;
 
     public function __construct()

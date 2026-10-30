@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ExerciseRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: ExerciseRepository::class)]
 class Exercise
@@ -12,10 +13,12 @@ class Exercise
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['workout:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
     #[Assert\NotBlank(message: 'Le nom doit être obligatoire.')]
+    #[Groups(['workout:read'])]
     #[Assert\Length(max: 100)]
     private ?string $name = null;
 

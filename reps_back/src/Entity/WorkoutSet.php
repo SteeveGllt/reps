@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\WorkoutSetRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: WorkoutSetRepository::class)]
 class WorkoutSet
@@ -12,24 +13,31 @@ class WorkoutSet
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['workout:read'])]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
+    #[Groups(['workout:read'])]
     private ?int $setNumber = null;
 
     #[ORM\Column(type: Types::SMALLINT, nullable: true)]
+    #[Groups(['workout:read'])]
     private ?int $reps = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['workout:read'])]
     private ?float $weight = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['workout:read'])]
     private ?int $duration = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['workout:read'])]
     private ?float $distance = null;
 
     #[ORM\Column(type: Types::SMALLINT, nullable: true)]
+    #[Groups(['workout:read'])]
     private ?int $rpe = null;
 
     #[ORM\ManyToOne(inversedBy: 'sets')]
@@ -38,6 +46,7 @@ class WorkoutSet
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['workout:read'])]
     private ?Exercise $exercise = null;
 
     public function getId(): ?int
